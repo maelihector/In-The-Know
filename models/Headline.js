@@ -8,6 +8,7 @@ var HeadlineSchema = new Schema({
 
   title: {
     type: String,
+    unique: true, // prevent duplicate headlines from being added to the server
     required: true
   },
 
