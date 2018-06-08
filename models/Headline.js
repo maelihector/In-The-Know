@@ -29,12 +29,12 @@ var HeadlineSchema = new Schema({
     required: true
   },
 
-  comments: {
+  comments: [{
     // Store ObjectIds in the 'comments' array
     type: Schema.Types.ObjectId,
     // The ObjectIds will refer to the ids in the Comment model
     ref: "Comment"
-  }
+  }]
 });
 
 // Create model from the above schema, using mongoose's model method
