@@ -36,7 +36,7 @@ var db = require("./models");
 
 // Import Controllers/Routes
 require("./controllers/headline-controller")(app);
-// require("./controllers/comment-controller")(app);
+require("./controllers/comment-controller")(app);
           
 // Start the server
 var PORT = process.env.PORT || 3000;
