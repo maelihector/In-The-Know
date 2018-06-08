@@ -11,11 +11,12 @@ var db = require("../models");
 // Export app to server.js
 module.exports = function (app) {
 
-  // Route for getting all Users  with their respective savedHeadlines array from the db
+  // Route for getting all Users  with their respective 'savedHeadlines' array from the db
   app.get("/users", function (req, res) {
     // Grab every document in the Headlines collection
     db.User.find({})
       // populate all of the comments associated with it
+      .populate("comments")
       .populate("savedHeadlines")
       .then(function (dbUser) {
         console.log(res);
@@ -35,6 +36,7 @@ module.exports = function (app) {
         _id: req.params.id
       })
       // populate all of their savedHeadlines ids
+      .populate("comments")
       .populate("savedHeadlines")
       .then(function (dbUser) {
         // If successful, send it back to the client

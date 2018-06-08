@@ -64,7 +64,7 @@ module.exports = function (app) {
       // populate all of the comments associated with it
       .populate("comments")
       .then(function (dbHeadline) {
-        // If we were able to successfully find Headlines, send them back to the client
+      // If successful, send it back to the client
         res.json(dbHeadline);
       })
       .catch(function (err) {

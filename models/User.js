@@ -5,18 +5,19 @@ var Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new `UserSchema` object
 var UserSchema = new Schema({
+
   // `trim:` will trim leading and trailing whitespace before it's saved
-  // `required:` s a required field and throws a custom error message if not supplied
-  // `unique` prevents duplicate usernames from being added to the server
+  // `required:` is a required field and throws a custom error message if not supplied
   name: {
     type: String,
     trim: true,
     required: "First Name is Required"
   },
-
+  
   username: {
     type: String,
     trim: true,
+    // `unique` prevents duplicate usernames from being added to the server
     unique: true,
     required: "Username is Required"
   },
@@ -34,20 +35,25 @@ var UserSchema = new Schema({
     ]
   },
 
+  comments: [{
+    // When user submits a comment, add and store the Comment ObjectID to `comments' array
+    type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Comment model
+    ref: "Comment"
+  }],
+
   savedHeadlines: [{
-    // Store ObjectIds in the `savedHeadlines` array
+    // When user saves a headline, add and store the Headline's ObjectID to `savedHeadlines' array
     type: Schema.Types.ObjectId,
     // The ObjectIds will refer to the ids in the Headline model
     ref: "Headline"
   }],
 
-  // `date` must be of type Date. The default value is the current date
   userCreated: {
     type: Date,
     default: Date.now
   },
 
-  // `lastUpdated` must be of type Date
   lastUpdated: Date,
 });
 
