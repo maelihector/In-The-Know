@@ -2,5 +2,6 @@
 
 module.exports = {
   Headline: require("./Headline"),
-  Comment: require("./Comment")
+  Comment: require("./Comment"),
+  User: require("./User")
 };
