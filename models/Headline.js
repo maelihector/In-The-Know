@@ -3,12 +3,14 @@ var mongoose = require("mongoose");
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
 
-// Create a new UserSchema object
+// Create a new HeadlineSchema object
 var HeadlineSchema = new Schema({
 
+  // `unique` prevents duplicate Headlines from being added to the server
+  // `required` s a required field and throws a custom error message if not supplied 
   title: {
     type: String,
-    unique: true, // prevent duplicate headlines from being added to the server
+    unique: true,
     required: true
   },
 
@@ -26,13 +28,13 @@ var HeadlineSchema = new Schema({
     type: String,
     required: true
   },
-  // `comment` is an object that stores a comment id
-  // The ref property links the ObjectId to the comment model
-  // This allows us to populate the Headline with an associated comment
-  // comment: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "Comment"
-  // }
+
+  comments: {
+    // Store ObjectIds in the 'comments' array
+    type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Comment model
+    ref: "Comment"
+  }
 });
 
 // Create model from the above schema, using mongoose's model method
