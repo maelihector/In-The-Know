@@ -5,9 +5,9 @@ var Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new `UserSchema` object
 var UserSchema = new Schema({
-
   // `trim:` will trim leading and trailing whitespace before it's saved
   // `required:` s a required field and throws a custom error message if not supplied
+  // `unique` prevents duplicate usernames from being added to the server
   name: {
     type: String,
     trim: true,
@@ -17,6 +17,7 @@ var UserSchema = new Schema({
   username: {
     type: String,
     trim: true,
+    unique: true,
     required: "Username is Required"
   },
 
@@ -33,12 +34,12 @@ var UserSchema = new Schema({
     ]
   },
 
-  savedHeadlines: {
+  savedHeadlines: [{
     // Store ObjectIds in the `savedHeadlines` array
     type: Schema.Types.ObjectId,
     // The ObjectIds will refer to the ids in the Headline model
     ref: "Headline"
-  },
+  }],
 
   // `date` must be of type Date. The default value is the current date
   userCreated: {
