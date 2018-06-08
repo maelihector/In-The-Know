@@ -57,11 +57,12 @@ module.exports = function (app) {
     });
   });
 
-
-  // Route for getting all Headlines from the db
+  // Route for getting all Headlines  with their respective comments from the db
   app.get("/headlines", function (req, res) {
     // Grab every document in the Headlines collection
     db.Headline.find({})
+      // populate all of the comments associated with it
+      .populate("comments")
       .then(function (dbHeadline) {
         // If we were able to successfully find Headlines, send them back to the client
         res.json(dbHeadline);
@@ -72,16 +73,16 @@ module.exports = function (app) {
       });
   });
 
-  // Route for grabbing a specific Headline by id, populate it with it's comment
+  // Route for getting a specific Headline by id that is populated with its respective comments
   app.get("/headlines/:id", function (req, res) {
-    // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+    // Using the id passed in the id parameter, prepare a query that finds the matching one in our db,
     db.Headline.findOne({
         _id: req.params.id
       })
-      // ..and populate all of the comments associated with it
-      .populate("comment")
+      // populate all of the comments associated with it
+      .populate("comments")
       .then(function (dbHeadline) {
-        // If we were able to successfully find an Headline with the given id, send it back to the client
+        // If successful, send it back to the client
         res.json(dbHeadline);
       })
       .catch(function (err) {
@@ -89,5 +90,4 @@ module.exports = function (app) {
         res.json(err);
       });
   });
-
 }
