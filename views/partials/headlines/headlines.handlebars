@@ -10,10 +10,10 @@ This div does not need any user information
       <article class="article-row" data-id="{{this._id}}">
         <div class="article-row-img">
           <img src="{{this.imageURL}}" alt="grab in scrape!" />
-          <button headline-id="{{this._id}}" data-open="loginModal" type="button" class="success button">
+          <button headline-id="{{this._id}}" action="/saveHeadline" method="get" type="button" class="success button">
             Save
           </button>
-          <button headline-id="{{this._id}}" data-open="loginModal" type="button" class="success button">
+          <button headline-id="{{this._id}}" data-open="commentModal" type="button" class="success button">
             Comment
           </button>
         </div>
@@ -29,3 +29,21 @@ This div does not need any user information
     </a>
   </div>
 </div>
+
+{{!-- commentModal Structure Start Here --}}
+<div class="reveal" id="commentModal" data-reveal>
+  <h1>Comment Below.</h1>
+  <p class="lead">What would you like to share?</p>
+ 
+  <form action="/submit" method="post" data={{this._id}} >
+    <label>
+      <p  type="text" name="id">{{this._id}}</p>
+    <textarea type="text" name="body" data={{this._id}} placeholder="Your Comment"></textarea>
+    </label>
+    <button class="close-button" data-close aria-label="Close reveal" type="submit">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <input type="submit">
+  </form>
+</div>
+{{!-- commentModal Structure Ends Here --}}

@@ -6,11 +6,11 @@ var Schema = mongoose.Schema;
 // Using the Schema constructor, create a new `CommentSchema` object
 var CommentSchema = new Schema({
 
-  // `headline` is an object that stores a Headline id that the comment was posted on
+  // `headline` stores the Headline id that the comment was posted on
   // The ref property links the ObjectId to the User model, which allows us to populate the Comment with an associated User
   
   headline: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "Headline"
   },
 

@@ -14,7 +14,6 @@ $(function () {
 //  End of sticky header js
 
 // Scrape button to scrape new unique articles from bbc
-
 $(".new-scrape").on("click", function (event){
   $.ajax("/scrape", {
     method: "GET"
@@ -59,7 +58,16 @@ $(".new-scrape").on("click", function (event){
   });
 
 
+// function changeImageUrl(result) {
 
+  // var unusableUrl = "https://ichef.bbci.co.uk/news/{width}/cpsprodpb/16F90/production/_101969049_mediaitem101969048.jpg";
+  // var replace = /{width}/gi;
+  // var usableUrl = unusableUrl.replace(replace, '250');
+  
+  // console.log(usableUrl);
+// }
 
+// changeImageUrl(); 
+// https://ichef.bbci.co.uk/news/250/cpsprodpb/16F90/production/_101969049_mediaitem101969048.jpg
 
 });

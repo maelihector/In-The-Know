@@ -58,11 +58,16 @@ module.exports = function (app) {
   // Route for getting all Headlines  with their respective comments from the db
   app.get("/", function (req, res) {
     // Grab every document in the Headlines collection
-    db.Headline.find({})
+    db.Headline.find({
+
+      })
       // populate all of the comments associated with each
+
+
+
       .populate("comments")
       .then(function (dbHeadline) {
-        // If successful, send it back to the client on index.hbs
+        // If successful, send it back to the client
         res.render("index", {
           dbHeadline: dbHeadline
         });
@@ -74,7 +79,7 @@ module.exports = function (app) {
   });
 
   // Route for getting a specific Headline by id that is populated with its respective comments
-  app.get("/headline/:id", function (req, res) {
+  app.get("/headlines/:id", function (req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db,
     db.Headline.findOne({
         _id: req.params.id

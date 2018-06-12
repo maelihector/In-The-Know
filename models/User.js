@@ -43,7 +43,7 @@ var UserSchema = new Schema({
   }],
 
   savedHeadlines: [{
-    // When user saves a headline, add and store the Headline's ObjectID to `savedHeadlines' array
+    // When user saves a headline, add and store to `savedHeadlines' array
     type: Schema.Types.ObjectId,
     // The ObjectIds will refer to the ids in the Headline model
     ref: "Headline"
