@@ -1,0 +1,31 @@
+{{!-- 
+This div block will get db information from HeadlineDB via HeadlineDB's controller.js. 
+This div does not need any user information
+ --}}
+
+<div class="article-row-section">
+  <div class="article-row-section-inner">
+    {{!-- Pass in data --}}
+    <a>
+      <article class="article-row" data-id="{{this._id}}">
+        <div class="article-row-img">
+          <img src="{{this.imageURL}}" alt="grab in scrape!" />
+          <button headline-id="{{this._id}}" data-open="loginModal" type="button" class="success button">
+            Save
+          </button>
+          <button headline-id="{{this._id}}" data-open="loginModal" type="button" class="success button">
+            Comment
+          </button>
+        </div>
+        <div class="article-row-content">
+          <h1 href="{{this.link}}" class="article-row-content-header">{{this.title}}</h1>
+          <p class="article-row-content-description">{{this.summary}}</p>
+          <button class="button" type="button" data-toggle="comments-dropdown">See Comments</button>
+          <div class="dropdown-pane" id="comments-dropdown" data-dropdown>
+            {{this.comments}}
+          </div>
+        </div>
+      </article>
+    </a>
+  </div>
+</div>

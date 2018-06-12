@@ -31,41 +31,41 @@ module.exports = function (app) {
           .children("div.gs-c-promo-body").find("p")
           .text();
 
-        result.link = $(this)
+        result.link = "https://www.bbc.com" + $(this)
           .children("div.gs-c-promo-body").find("a")
           .attr("href");
 
         // imageURL is currently only working right for the first headline
         result.imageURL = $(this)
-          .children("div.gs-c-promo-image").find("img")
-          .attr("src");
+          .children("div.gs-c-promo-image").find("img").attr("data-src")
 
         // Create a new Headline using the `result` object built from scraping
         db.Headline.create(result)
-          .then(function (dbHeadline) {
+        .then(function (dbHeadline) {
             // View the added result in the console
             console.log(dbHeadline);
           })
           .catch(function (err) {
             // If an error occurs, send it to the client
-            return res.json(err);
+            res.json(err);
           });
       });
-
-      // If able to successfully scrape and save a Headline, send a message to the client
+      // // If able to successfully scrape and save a Headline, send a message to the client
       res.send("Scrape Complete");
     });
   });
 
   // Route for getting all Headlines  with their respective comments from the db
-  app.get("/headlines", function (req, res) {
+  app.get("/", function (req, res) {
     // Grab every document in the Headlines collection
     db.Headline.find({})
-      // populate all of the comments associated with it
+      // populate all of the comments associated with each
       .populate("comments")
       .then(function (dbHeadline) {
-      // If successful, send it back to the client
-        res.json(dbHeadline);
+        // If successful, send it back to the client on index.hbs
+        res.render("index", {
+          dbHeadline: dbHeadline
+        });
       })
       .catch(function (err) {
         // If an error occurred, send it to the client
@@ -74,7 +74,7 @@ module.exports = function (app) {
   });
 
   // Route for getting a specific Headline by id that is populated with its respective comments
-  app.get("/headlines/:id", function (req, res) {
+  app.get("/headline/:id", function (req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db,
     db.Headline.findOne({
         _id: req.params.id
@@ -90,4 +90,7 @@ module.exports = function (app) {
         res.json(err);
       });
   });
+
+
+
 }

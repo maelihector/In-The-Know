@@ -53,7 +53,7 @@ body {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  background-image: url(../../images/navGlobe.jpg);
+  background-image: url("../images/navGlobe.jpg");
   text-align: center;
   position: fixed;
   top: 0;

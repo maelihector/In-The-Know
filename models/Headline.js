@@ -30,7 +30,7 @@ var HeadlineSchema = new Schema({
   },
 
   comments: [{
-       // When user submits a comment on the headline, add and store the Comment ObjectID to `comments' array
+       // When user submits a comment on a headline, add and store the Comment ObjectID to `comments' array
     type: Schema.Types.ObjectId,
     // The ObjectIds will refer to the ids in the Comment model
     ref: "Comment"

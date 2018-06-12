@@ -1,0 +1,79 @@
+<header class="sticky-shrinknav-header">
+  <h2 class="sticky-shrinknav-header-title">
+    <span style="font-weight: bolder; font-size: 3.5rem">Mongo Scraper </span>
+    - BBC World News Edition
+    <a type="submit" class="button expanded new-scrape" action="/scrape" method="post">Scrape New headlines</a>
+  </h2>
+  <ul class="menu align-center sticky-shrinknav-menu">
+    <li>
+      <a href="#">Home</a>
+    </li>
+    <li>
+      <a href="#">Saved Articles</a>
+    </li>
+    <li>
+      <a type="submit" class="button new-scrape" action="/scrape" method="post">Scrape New Articles</a>
+    </li>
+        <li>
+      <a data-open="loginModal">Log-in/Sign-up</a>
+    </li>
+  </ul>
+</header>
+{{!--
+<!-- Headlines begin here. -->--}} 
+
+{{#each dbHeadline}} 
+  {{> headlines/headlines }} 
+{{/each}} 
+
+{{!-- loginModal Structure Start Here --}} {{!-- This div
+block is the modal for user sign-in/log-in that will pop up when a user: a. Tries to save or comment on a button when in
+index.hbs, and not in user.hbs. b. Click on the sign-in/log-in button in index.hbs. After the form is submitted, the user
+will then be taken to user.hbs with their user_id in the url. This allows them to save/unsave headlines, and add/delete comments
+on the headlines. --}}
+
+<div class="reveal" id="loginModal" data-reveal>
+  <h1>Sign up or Log in.</h1>
+  <p class="lead">In order to save or comment on an article you must sign up or log in.</p>
+
+  <form data-abide novalidate action="/newUser" method="post" name="body">
+    <div class="grid-x grid-margin-x">
+      <div class="cell">
+        <div data-abide-error class="alert callout" style="display: none;">
+          <p>
+            <i class="fi-alert"></i> There are some errors in your form.</p>
+        </div>
+      </div>
+    </div>
+    <div class="medium-6 cell">
+      <label>First Name
+        <input name= "name"  type="text" placeholder="John">
+      </label>
+    </div>
+    <div class="medium-6 cell">
+      <label>User Name
+        <input name= "username" type="text" placeholder="John1234">
+      </label>
+    </div>
+    <div class="cell small-12">
+      <label>Password Required
+        <input name= "password" type="password" id="password" placeholder="yeti4preZ" aria-describedby="exampleHelpText" required>
+        <span class="form-error">
+          I'm required!
+        </span>
+      </label>
+      <p class="help-text" id="exampleHelpText">Enter a password please.</p>
+    </div>
+    <div class="cell small-12">
+      <label>Re-enter Password
+        <input type="password" placeholder="yeti4preZ" aria-describedby="exampleHelpText2" required pattern="alpha_numeric" data-equalto="password">
+        <span class="form-error">
+          Hey, passwords are supposed to match!
+        </span>
+      </label>
+      <p class="help-text" id="exampleHelpText2">This field is using the `data-equalto="password"` attribute, causing it to match the password field above.</p>
+    </div>
+    <input type="submit">
+  </form>
+</div>
+{{!-- loginModal Structure Ends Here --}}
